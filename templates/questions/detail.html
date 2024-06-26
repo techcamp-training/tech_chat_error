@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="show-main">
+  <div class="show-contents">
+    <!-- 質問内容の表示 -->
+    <div class="show-question">
+      <div class="show-question__title">
+        {{ question.title}}
+      </div>
+      <div class="show-question__content">
+        {{ question.content}}
+      </div>
+      <div class="show-question__name">
+        {{ question.name}}
+      </div>
+    </div>
+
+    <!-- 回答投稿フォームの表示 -->
+    <div class="show-answer-form">
+      <form method="post" action="{% url 'questions:answers:answer' pk=question.id %}">
+        {% csrf_token %}
+        <div class="show-answer-form__heading">
+          回答する
+        </div>
+        <div class="show-answer-form__content">
+          {{ form.content }}
+        </div>
+        <div class="show-answer-form__name">
+           {{ form.name }}
+        </div>
+        <div class="show-answer-form__submit">
+          <input type="submit" value="POST">
+        </div>
+      </form>
+    </div>
+
+    <!-- 回答一覧の表示 -->
+    <div class="show-answers">
+      <div class="answers-heading">
+        いままでの回答：
+      </div>
+      {% for answer in answers %}
+        <div class="answer-content">
+          <div class="answer-content__text">
+            {{ answer.content }}
+          </div>
+          <div class="answer-content__name">
+            {{ answer.name }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>  
+  </div>  
+</div>  
+
+{% endblock content %}

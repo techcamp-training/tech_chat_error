@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class='new-main'>
+  <!-- フォーム -->
+  <div class='form'>
+    <!-- フォームのヘッダー表示 -->
+    <div class='form-top'>
+    </div>
+
+    <!-- フォームのメイン部分 -->
+    <div class='form-main'>
+      <form method="post">
+      {% csrf_token %}
+      <div class='input-items'>
+        <div class='input-items__title'>
+          {{ form.title }}
+        </div>
+        <div class='input-items__content'>
+          {{ form.content }}
+        </div>
+        <div class='input-items__name'>
+          {{ form.name }}
+        </div>
+        <button type="submit" class="input-items__submit">POST</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+
+
