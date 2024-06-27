@@ -9,12 +9,11 @@ from django.db.models import Count
 
 class IndexView(ListView):
     model = Question
-    template_name = 'questions/index.html'
+    template_name = 'questions/list.html'
     context_object_name = 'questions'
 
     def get_queryset(self):
         return Question.objects.annotate(num_answers=Count('answer'))
-
 
 class CreateView(CreateView):
     template_name = 'questions/create.html'
@@ -23,7 +22,6 @@ class CreateView(CreateView):
 
     def form_valid(self, form):
       question = form.save(commit=False)
-      question.save()
       return super().form_valid(form)
 
 class DetailView(DetailView, FormMixin):
