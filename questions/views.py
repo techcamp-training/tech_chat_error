@@ -5,11 +5,15 @@ from .forms import QuestionForm
 from django.views.generic.edit import FormMixin
 from answers.forms import AnswerForm
 from answers.models import Answer
+from django.db.models import Count
 
 class IndexView(ListView):
     model = Question
     template_name = 'questions/index.html'
     context_object_name = 'questions'
+
+    def get_queryset(self):
+        return Question.objects.annotate(num_answers=Count('answer'))
 
 
 class CreateView(CreateView):
